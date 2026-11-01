@@ -1,0 +1,13 @@
+import { existsSync, readFileSync, appendFileSync, writeFileSync } from 'node:fs';
+import { randomBytes } from 'node:crypto';
+const path='.env.local';
+if(!existsSync(path))writeFileSync(path,'# Local only; never commit this file.\n');
+const source=readFileSync(path,'utf8');
+const hasValue=name=>new RegExp(`^${name}\\s*=\\s*["']?[^\\s"'\\r\\n]+`,'m').test(source);
+const additions=[];
+if(!hasValue('AUTH_PEPPER'))additions.push(`AUTH_PEPPER=${randomBytes(48).toString('base64url')}`);
+if(!hasValue('APP_ORIGIN'))additions.push('APP_ORIGIN=https://localhost:5173');
+if(additions.length)appendFileSync(path,'\n# Local server settings\n'+additions.join('\n')+'\n');
+console.log('Local setup checked. Existing values preserved. No secret values are printed.');
+if(!hasValue('SUPABASE_SECRET_KEY'))console.log('Required: set SUPABASE_SECRET_KEY in .env.local using your Supabase server key.');
+console.log('APP_ORIGIN must match the actual HTTPS address opened in the browser. Start: npm.cmd run dev:https');
