@@ -1,4 +1,4 @@
-import type {TeacherSnapshot} from './types';
+import type {TeacherSnapshot} from './types.ts';
 export function assignmentReadiness(state:TeacherSnapshot):'ready'|'locked'|'students'|'missions' {
  if(state.status!=='setup')return 'locked';
  if(state.students.length<3)return 'students';

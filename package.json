@@ -8,7 +8,7 @@
     "build": "tsc -b && tsc -p tsconfig.server.json && vite build",
     "test": "node --experimental-strip-types --test src/game.test.ts",
     "preview": "vite preview --host 0.0.0.0",
-    "test:security": "node --experimental-strip-types --test tests/security.test.ts tests/database.test.ts tests/management.test.ts tests/local-setup.test.ts tests/dev-tls.test.ts tests/short-codes.test.ts tests/assignment-flow.test.ts tests/activity-reset.test.ts",
+    "test:security": "node --experimental-strip-types --test tests/security.test.ts tests/database.test.ts tests/management.test.ts tests/local-setup.test.ts tests/dev-tls.test.ts tests/short-codes.test.ts tests/assignment-flow.test.ts tests/activity-reset.test.ts tests/vercel-runtime.test.ts",
     "test:all": "npm run test && npm run test:security",
     "dev:https": "vite --host 0.0.0.0 --mode https",
     "setup:local": "node scripts/setup-local.mjs",
